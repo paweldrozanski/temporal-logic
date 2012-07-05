@@ -4,4 +4,8 @@
 
 %p Gałęzie:
 - @br.each do |var|
-	%p=var
+	- if var[-1] == 'g'
+		%p{:style => "color:green"}=var.take(var.length-1)
+	- else
+		%p{:style => "color:red"}=var.take(var.length-1)
+	

@@ -6,8 +6,10 @@
 
 %p Gałęzie:
 - @br.each do |var|
-	%p=var 	
-
+	- if var[-1] == 'g'
+		%p{:style => "color:green"}=var.take(var.length-1)
+	- else
+		%p{:style => "color:red"}=var.take(var.length-1)
 
 / %input{:type => "checkbox", :value => "1", :name => "checkbox[]", :id => "id1"} Chk1
 / %input{:type => "checkbox", :value => "2", :name => "checkbox[]", :id => "id2"} Chk2

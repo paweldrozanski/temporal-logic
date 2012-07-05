@@ -172,42 +172,92 @@ def parse(formula)
 		
 		if ['<>', '[]', '<>[]', '[]<>', '<>[]<>', '[]<>[]'].include?(prefix)  #prefix <> lub [] -> przepisywanie prefixu z formula
 			atomized(formula) ? ["#{prefix}#{formula}"] : ["#{prefix}#{temp_in23[0]}", temp_in23[1], "#{prefix}#{temp_in23[2]}"]
+
 		elsif prefix == '~<>' #zaprzeczenie <>
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["[]#{formula}"]  : ["[]#{parse(formula)[0]}", parse(formula)[1], "[]#{parse(formula)[2]}"]
+		
 		elsif prefix == '~[]'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["<>#{formula}"]  : ["<>#{parse(formula)[0]}", parse(formula)[1], "<>#{parse(formula)[2]}"]
+		
 		elsif prefix == '<>~'
-			raise "not implemented #{prefix}" 
+			#raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["<>#{formula}"]  : ["<>#{parse(formula)[0]}", parse(formula)[1], "<>#{parse(formula)[2]}"]
+		
 		elsif prefix == '[]~'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["[]#{formula}"]  : ["[]#{parse(formula)[0]}", parse(formula)[1], "[]#{parse(formula)[2]}"]
+		
 		elsif prefix == '~<>~'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			atomized(formula) ? ["[]#{formula}"]  : ["[]#{parse(formula)[0]}", parse(formula)[1], "[]#{parse(formula)[2]}"]
+
 		elsif prefix == '~[]~'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}"
+			atomized(formula) ? ["<>#{formula}"]  : ["<>#{parse(formula)[0]}", parse(formula)[1], "<>{parse(formula)[2]}"] 
+
 		elsif prefix == '~<>[]'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["[]<>#{formula}"]  : ["[]<>#{parse(formula)[0]}", parse(formula)[1], "[]<>#{parse(formula)[2]}"]
+
 		elsif prefix == '~[]<>'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["<>[]#{formula}"]  : ["<>[]#{parse(formula)[0]}", parse(formula)[1], "<>[]#{parse(formula)[2]}"]
+
 		elsif prefix == '[]~<>'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["[]#{formula}"]  : ["[]#{parse(formula)[0]}", parse(formula)[1], "[]#{parse(formula)[2]}"]
+
 		elsif prefix == '<>~[]'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["<>#{formula}"]  : ["<>#{parse(formula)[0]}", parse(formula)[1], "<>#{parse(formula)[2]}"]
+
 		elsif prefix == '[]<>~'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["[]<>#{formula}"]  : ["[]<>#{parse(formula)[0]}", parse(formula)[1], "[]<>#{parse(formula)[2]}"]
+
 		elsif prefix == '<>[]~'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["<>[]#{formula}"]  : ["<>[]#{parse(formula)[0]}", parse(formula)[1], "<>[]#{parse(formula)[2]}"]
+
 		elsif prefix == '~<>~[]'
 			raise "not implemented #{prefix}" 
+			atomized(formula) ? ["[]#{formula}"]  : ["[]#{parse(formula)[0]}", parse(formula)[1], "[]#{parse(formula)[2]}"]
+
 		elsif prefix == '~<>[]~'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			atomized(formula) ? ["[]<>#{formula}"]  : ["[]<>#{parse(formula)[0]}", parse(formula)[1], "[]<>#{parse(formula)[2]}"]
+
 		elsif prefix == '~<>~[]~'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["[]#{formula}"]  : ["[]#{parse(formula)[0]}", parse(formula)[1], "[]#{parse(formula)[2]}"]
+
 		elsif prefix == '~[]~<>'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			atomized(formula) ? ["<>#{formula}"]  : ["<>#{parse(formula)[0]}", parse(formula)[1], "<>#{parse(formula)[2]}"]
+
 		elsif prefix == '~[]<>~'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			atomized(formula) ? ["<>[]#{formula}"]  : ["<>[]#{parse(formula)[0]}", parse(formula)[1], "<>[]#{parse(formula)[2]}"]
+
 		elsif prefix == '~[]~<>~'
-			raise "not implemented #{prefix}" 
+			# raise "not implemented #{prefix}" 
+			formula = "~#{formula}"
+			atomized(formula) ? ["<>#{formula}"]  : ["<>#{parse(formula)[0]}", parse(formula)[1], "<>#{parse(formula)[2]}"]
+		else 
+			raise "EXCEPTION WTF?"
 		end
 
 	
@@ -482,8 +532,20 @@ def make_tree_of_formula(formula)
 
 		
 		elsif parsed.length == 1
+
 			if tmp_r_node.content.next[0].nil?
-				#TODO dla logiki temporalnej: <>p -> p
+
+				# if prefix_and_formula(parsed)["prefix"] =~ /\<|\]/
+				# 	tmp_current = prefix_and_formula(parsed)["formula"]
+				# 	tmp_id = tmp_r_node.name.dup << "1"
+
+				# 	treenode = Tree::TreeNode.new(tmp_id, TNode.new(tmp_current, [*tmp_r_node.content.next])) #?????
+
+				# 	r_node.each_leaf {|leaf| leaf << treenode if (leaf.name == tmp_r_node.name)	}
+
+				# 	list2parse = [treenode, *list2parse]
+				# end
+
 			else
 				#nastepnik nie jest nil = zostaly jakies formuly do rozkladu
 				#raise "ELSE"
