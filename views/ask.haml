@@ -1,0 +1,13 @@
+%h1 Temporal Logic in Ruby
+%form{:action => "/formula", :method => "post"}
+  %legend
+    Projekt zaliczeniowy z przedmiotu "Języki formalne i kompilatory."
+  %p
+    %label{:for => ""} Proszę podać formułę logiki temporalnej: 
+    %input{:type => "textbox", :name => "formula", :id => "formula"}
+  %p
+    %input{:type => "submit", :value => "Submit!"}
+
+%form{:action => "/notformula", :method => "post"}
+  %p
+    %input{:type => "submit", :value => "Losowa formuła"}

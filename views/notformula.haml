@@ -1,0 +1,14 @@
+- load "testy.rb"
+
+%p== Zadana formuła logiczna to #{@formula}
+
+%img{ :src => "images/formula.png"}
+
+%p Gałęzie:
+- @br.each do |var|
+	%p=var 	
+
+
+/ %input{:type => "checkbox", :value => "1", :name => "checkbox[]", :id => "id1"} Chk1
+/ %input{:type => "checkbox", :value => "2", :name => "checkbox[]", :id => "id2"} Chk2
+/ %input{:type => "checkbox", :value => "3", :name => "checkbox[]", :id => "id3"} Chk3
