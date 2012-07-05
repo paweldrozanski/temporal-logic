@@ -142,7 +142,7 @@ def parse(formula)
 	#formula = formula.gsub(/ /,'')
 	#formula = remove_spare_parenthesis(simplify(formula))
 
-	#formula.replace(simplify(remove_spare_parenthesis(formula)))
+	formula.replace(simplify(remove_spare_parenthesis(formula)))
 
 	prefix = prefix_and_formula(formula)["prefix"]
 	formula = prefix_and_formula(formula)["formula"]
@@ -440,12 +440,14 @@ def make_tree_of_formula(formula)
 		3.times {puts}
 
 		tmp_r_node = list2parse.shift.dup
+		
 		p "CURRENT"
 		p tmp_r_node.content.current
 		p "NEXT"
 		p tmp_r_node.content.next
 		p "PARSED"
 		p parsed = parse(tmp_r_node.content.current)
+		#raise "NOT PARSED?"
 
 		if parsed.length == 3 and parsed[1] == '&' #sparsowana formula dlugosci 3 oraz koniunkcja w srodku
 			#raise "3&"
@@ -480,12 +482,12 @@ def make_tree_of_formula(formula)
 
 		
 		elsif parsed.length == 1
-			
 			if tmp_r_node.content.next[0].nil?
 				#TODO dla logiki temporalnej: <>p -> p
 			else
 				#nastepnik nie jest nil = zostaly jakies formuly do rozkladu
-				tmp_current = tmp_r_node.content.next.shift #wyciagniecie pierwszej formuly z tmp_r_node.content.next
+				#raise "ELSE"
+				p tmp_current = tmp_r_node.content.next.shift #wyciagniecie pierwszej formuly z tmp_r_node.content.next
 				#nie potrzeba definiowac next
 				tmp_id = tmp_r_node.name.dup << "1"
 
@@ -499,9 +501,6 @@ def make_tree_of_formula(formula)
 			#raise "length = 1"
 		end
 			
-
-
-
 
 
 

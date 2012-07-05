@@ -1,7 +1,7 @@
 load "testy.rb"
 
 
-form = '~(p&q)'
+form = 'p|q'
 #p prefix_and_formula(form)
 
 #p parse(form)
